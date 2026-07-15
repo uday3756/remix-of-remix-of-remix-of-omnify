@@ -1,8 +1,11 @@
 import { FOOTER_LINKS, SITE } from "@/data/nav";
+import { Footer3DBanner } from "@/components/Footer3DBanner";
 
 export function Footer() {
   return (
     <footer className="mt-auto">
+      <Footer3DBanner />
+
       <div className="border-t border-border bg-surface-alt">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 py-8 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex items-start gap-3">

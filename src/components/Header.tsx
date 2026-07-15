@@ -8,7 +8,7 @@ export function Header() {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
+    <header className="shaped-edge shaped-header sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-6">
         <a href="/" className="flex shrink-0 items-center gap-2.5 font-semibold">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">

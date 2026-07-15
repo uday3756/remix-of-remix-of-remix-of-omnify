@@ -37,7 +37,7 @@ export function ServicesFilterGrid({
             <ToggleGroupItem
               key={option.value}
               value={option.value}
-              className="px-4 text-background data-[state=on]:bg-background data-[state=on]:text-foreground hover:bg-background/10 hover:text-background"
+              className="px-4 text-foreground data-[state=on]:bg-foreground data-[state=on]:text-background hover:bg-foreground/10 hover:text-foreground"
             >
               {option.label}
             </ToggleGroupItem>

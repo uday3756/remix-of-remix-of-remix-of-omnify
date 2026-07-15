@@ -46,7 +46,8 @@ function CardShell({
   image?: string;
 }) {
   return (
-    <article className="flex w-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition-shadow hover:shadow-md">
+    <article className="group flex w-full flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition-all duration-500 ease-out will-change-transform hover:-translate-y-1 hover:shadow-2xl hover:[transform:perspective(1000px)_rotateX(4deg)_rotateY(-6deg)_scale(1.03)]">
+
       <div
         className={`relative flex h-44 flex-col items-center justify-center ${headerClass}`}
       >

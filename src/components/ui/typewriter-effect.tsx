@@ -133,13 +133,24 @@ export const TypewriterEffectSmooth = ({
   return (
     <div className={cn("flex space-x-1 my-6", className)}>
       <motion.div
-        className="overflow-hidden pb-2"
-        initial={{ width: "0%" }}
-        animate={{ width: "fit-content" }}
+        className="pb-2"
+        initial={{ clipPath: "inset(0 100% 0 0)" }}
+        animate={{
+          clipPath: [
+            "inset(0 100% 0 0)",
+            "inset(0 0% 0 0)",
+            "inset(0 0% 0 0)",
+            "inset(0 100% 0 0)",
+            "inset(0 100% 0 0)",
+          ],
+        }}
         transition={{
-          duration: 2,
+          duration: 6,
+          times: [0, 0.35, 0.75, 0.95, 1],
           ease: "linear",
-          delay: 1,
+          repeat: Infinity,
+          repeatDelay: 0.4,
+          delay: 0.6,
         }}
       >
         <div

@@ -91,13 +91,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "My Gym Walnut Creek" },
+      { name: "twitter:description", content: "Find the perfect class, camp, or party for your family at My Gym Walnut Creek." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/318d5d4b-b225-4333-b268-49b319add883/id-preview-c0dfb6bd--433b873a-de4c-4d80-9048-3d1e8859a99c.lovable.app-1784109453651.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/318d5d4b-b225-4333-b268-49b319add883/id-preview-c0dfb6bd--433b873a-de4c-4d80-9048-3d1e8859a99c.lovable.app-1784109453651.png" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,

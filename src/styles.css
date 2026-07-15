@@ -159,6 +159,70 @@
   --font-mono: "Geist Mono", ui-monospace, monospace;
 }
 
+/* ---------- Shape variants driven by [data-shape] on <html> ---------- */
+.shaped-edge {
+  position: relative;
+}
+.shaped-edge::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: var(--surface);
+  pointer-events: none;
+  z-index: 1;
+}
+.shaped-header.shaped-edge::after {
+  bottom: -17px;
+}
+.shaped-footer.shaped-edge::after {
+  top: -17px;
+  background: var(--background);
+}
+
+/* Straight (default) — hide the shape strip */
+:root[data-shape="straight"] .shaped-edge::after {
+  display: none;
+}
+
+/* Wave */
+:root[data-shape="wave"] .shaped-edge::after {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 18' preserveAspectRatio='none'><path d='M0 0 Q30 24 60 9 T120 0 L120 18 L0 18 Z' fill='black'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 18' preserveAspectRatio='none'><path d='M0 0 Q30 24 60 9 T120 0 L120 18 L0 18 Z' fill='black'/></svg>");
+  -webkit-mask-size: 120px 18px;
+          mask-size: 120px 18px;
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+}
+.shaped-footer.shaped-edge:where([data-shape="wave"] *)::after,
+:root[data-shape="wave"] .shaped-footer.shaped-edge::after {
+  transform: scaleY(-1);
+}
+
+/* Curve */
+:root[data-shape="curve"] .shaped-edge::after {
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, black 62%, transparent 63%);
+          mask-image: radial-gradient(120% 100% at 50% 0%, black 62%, transparent 63%);
+}
+:root[data-shape="curve"] .shaped-footer.shaped-edge::after {
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 100%, black 62%, transparent 63%);
+          mask-image: radial-gradient(120% 100% at 50% 100%, black 62%, transparent 63%);
+}
+
+/* Angle (zig-zag) */
+:root[data-shape="angle"] .shaped-edge::after {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 18' preserveAspectRatio='none'><polygon points='0,0 20,18 40,0 40,18 0,18' fill='black'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 18' preserveAspectRatio='none'><polygon points='0,0 20,18 40,0 40,18 0,18' fill='black'/></svg>");
+  -webkit-mask-size: 40px 18px;
+          mask-size: 40px 18px;
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+}
+:root[data-shape="angle"] .shaped-footer.shaped-edge::after {
+  transform: scaleY(-1);
+}
+
 .pattern-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),

@@ -8,6 +8,7 @@ export type ThemeId =
   | "noir"
   | "cloud";
 export type ShapeId = "straight" | "wave" | "curve" | "angle";
+export type HeroBgId = "default" | "image" | "video";
 
 export interface ThemeDefinition {
   id: ThemeId;
@@ -17,6 +18,11 @@ export interface ThemeDefinition {
 
 export interface ShapeDefinition {
   id: ShapeId;
+  label: string;
+}
+
+export interface HeroBgDefinition {
+  id: HeroBgId;
   label: string;
 }
 
@@ -38,11 +44,19 @@ export const SHAPES: ShapeDefinition[] = [
   { id: "angle", label: "Angle" },
 ];
 
+export const HERO_BACKGROUNDS: HeroBgDefinition[] = [
+  { id: "default", label: "Default" },
+  { id: "image", label: "Image" },
+  { id: "video", label: "Video" },
+];
+
 export const DEFAULT_THEME: ThemeId = "default";
 export const DEFAULT_SHAPE: ShapeId = "straight";
+export const DEFAULT_HERO_BG: HeroBgId = "image";
 
 export const THEME_STORAGE_KEY = "omnifyhome:theme";
 export const SHAPE_STORAGE_KEY = "omnifyhome:shape";
+export const HERO_BG_STORAGE_KEY = "omnifyhome:hero-bg";
 
 export function isThemeId(value: string | null): value is ThemeId {
   return !!value && THEMES.some((theme) => theme.id === value);
@@ -50,4 +64,8 @@ export function isThemeId(value: string | null): value is ThemeId {
 
 export function isShapeId(value: string | null): value is ShapeId {
   return !!value && SHAPES.some((shape) => shape.id === value);
+}
+
+export function isHeroBgId(value: string | null): value is HeroBgId {
+  return !!value && HERO_BACKGROUNDS.some((bg) => bg.id === value);
 }

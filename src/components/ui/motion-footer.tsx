@@ -46,14 +46,14 @@ const STYLES = `
 .footer-bg-grid {
   background-size: 60px 60px;
   background-image:
-    linear-gradient(to right, color-mix(in oklch, var(--foreground) 3%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 3%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in oklch, var(--foreground) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 10%, transparent) 1px, transparent 1px);
   mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
 }
 .footer-aurora {
   background: radial-gradient(circle at 50% 50%,
-    color-mix(in oklch, var(--primary) 15%, transparent) 0%,
-    color-mix(in oklch, var(--secondary) 15%, transparent) 40%,
+    color-mix(in oklch, var(--primary) 25%, transparent) 0%,
+    color-mix(in oklch, var(--secondary) 20%, transparent) 40%,
     transparent 70%);
 }
 .footer-glass-pill {
@@ -80,13 +80,13 @@ const STYLES = `
   font-weight: 900;
   letter-spacing: -0.05em;
   color: transparent;
-  -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 8%, transparent);
-  background: linear-gradient(180deg, color-mix(in oklch, var(--foreground) 12%, transparent) 0%, transparent 60%);
+  -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 18%, transparent);
+  background: linear-gradient(180deg, color-mix(in oklch, var(--foreground) 22%, transparent) 0%, transparent 60%);
   -webkit-background-clip: text;
   background-clip: text;
 }
 .footer-text-glow {
-  background: linear-gradient(180deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground) 50%, transparent) 100%);
+  background: linear-gradient(180deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground) 70%, transparent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

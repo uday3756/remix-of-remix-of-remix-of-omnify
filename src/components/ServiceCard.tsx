@@ -183,7 +183,7 @@ export function ServiceCard({ service }: { service: Service }) {
         {service.optionsCount} options available
       </p>
       <p className="text-sm font-bold">From {service.fromPrice}</p>
-      <div className="mt-auto pt-1">
+      <div className="mt-auto pt-1 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
         <PrimaryButton>
           Buy <span aria-hidden>→</span>
         </PrimaryButton>

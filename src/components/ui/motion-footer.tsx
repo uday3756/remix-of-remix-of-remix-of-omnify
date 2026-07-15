@@ -46,14 +46,14 @@ const STYLES = `
 .footer-bg-grid {
   background-size: 60px 60px;
   background-image:
-    linear-gradient(to right, color-mix(in oklch, var(--foreground) 3%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 3%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in oklch, var(--foreground) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 10%, transparent) 1px, transparent 1px);
   mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
 }
 .footer-aurora {
   background: radial-gradient(circle at 50% 50%,
-    color-mix(in oklch, var(--primary) 15%, transparent) 0%,
-    color-mix(in oklch, var(--secondary) 15%, transparent) 40%,
+    color-mix(in oklch, var(--primary) 25%, transparent) 0%,
+    color-mix(in oklch, var(--secondary) 20%, transparent) 40%,
     transparent 70%);
 }
 .footer-glass-pill {
@@ -80,13 +80,13 @@ const STYLES = `
   font-weight: 900;
   letter-spacing: -0.05em;
   color: transparent;
-  -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 8%, transparent);
-  background: linear-gradient(180deg, color-mix(in oklch, var(--foreground) 12%, transparent) 0%, transparent 60%);
+  -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 18%, transparent);
+  background: linear-gradient(180deg, color-mix(in oklch, var(--foreground) 22%, transparent) 0%, transparent 60%);
   -webkit-background-clip: text;
   background-clip: text;
 }
 .footer-text-glow {
-  background: linear-gradient(180deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground) 50%, transparent) 100%);
+  background: linear-gradient(180deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground) 70%, transparent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -177,7 +177,7 @@ const MARQUEE_ITEMS = [
 ];
 
 const MarqueeStrip = () => (
-  <div className="flex shrink-0 items-center gap-10 pr-10 text-sm font-semibold uppercase tracking-[0.2em] text-foreground/70">
+  <div className="flex shrink-0 items-center gap-10 pr-10 text-sm font-semibold uppercase tracking-[0.2em] text-foreground">
     {MARQUEE_ITEMS.map((item, i) => (
       <span key={i} className="flex items-center gap-10">
         <span>{item}</span>
@@ -264,7 +264,7 @@ export function CinematicFooter() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-10 sm:px-10">
           {/* Heading */}
           <div className="flex flex-col items-center text-center">
-            <span className="footer-glass-pill inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-[0.25em] text-foreground/80">
+            <span className="footer-glass-pill inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-[0.25em] text-foreground">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               Let's stay in touch
             </span>
@@ -306,13 +306,13 @@ export function CinematicFooter() {
                 </span>
                 <span className="text-base">{SITE.name}</span>
               </a>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-sm leading-relaxed text-muted">
                 A community-first space where every family moves, plays and grows.
               </p>
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                 Explore
               </p>
               <ul className="mt-4 space-y-2.5">
@@ -320,7 +320,7 @@ export function CinematicFooter() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="text-sm text-foreground/80 transition-colors hover:text-primary"
+                      className="text-sm text-foreground transition-colors hover:text-primary"
                     >
                       {l.label}
                     </a>
@@ -330,26 +330,26 @@ export function CinematicFooter() {
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                 Visit
               </p>
-              <p className="mt-4 text-sm text-foreground/80">{SITE.fullAddress}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{SITE.timezone}</p>
+              <p className="mt-4 text-sm text-foreground">{SITE.fullAddress}</p>
+              <p className="mt-2 text-sm text-muted">{SITE.timezone}</p>
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                 Contact
               </p>
               <a
                 href={`mailto:${SITE.email}`}
-                className="mt-4 block text-sm text-foreground/80 hover:text-primary"
+                className="mt-4 block text-sm text-foreground hover:text-primary"
               >
                 {SITE.email}
               </a>
               <MagneticButton
                 onClick={scrollToTop}
-                className="footer-glass-pill mt-6 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/80"
+                className="footer-glass-pill mt-6 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground"
               >
                 <span className="inline-flex items-center gap-2">
                   <ArrowUp className="h-3.5 w-3.5" /> Back to top
@@ -359,7 +359,7 @@ export function CinematicFooter() {
           </div>
 
           {/* Bottom row */}
-          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-foreground/10 pt-6 text-xs text-foreground/60 sm:flex-row">
+          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted sm:flex-row">
             <span>
               &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
             </span>

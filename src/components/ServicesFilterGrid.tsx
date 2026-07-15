@@ -34,7 +34,11 @@ export function ServicesFilterGrid({
           className="flex-wrap rounded-lg border border-border bg-surface p-1"
         >
           {FILTERS.map((option) => (
-            <ToggleGroupItem key={option.value} value={option.value} className="px-4">
+            <ToggleGroupItem
+              key={option.value}
+              value={option.value}
+              className="px-4 text-white data-[state=on]:bg-white data-[state=on]:text-black hover:bg-white/10 hover:text-white"
+            >
               {option.label}
             </ToggleGroupItem>
           ))}

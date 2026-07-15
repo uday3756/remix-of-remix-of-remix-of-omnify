@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 export const StickyScroll = ({
   content,
   contentClassName,
+  className,
 }: {
   content: {
     title: string;
@@ -12,6 +13,7 @@ export const StickyScroll = ({
     content?: React.ReactNode;
   }[];
   contentClassName?: string;
+  className?: string;
 }) => {
   const [activeCard, setActiveCard] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -56,7 +58,10 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-2xl p-10"
+      className={cn(
+        "relative flex h-[30rem] w-full justify-center space-x-10 overflow-y-auto rounded-2xl p-10 no-scrollbar",
+        className,
+      )}
       ref={ref}
     >
       <div className="div relative flex items-start px-4">

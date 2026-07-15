@@ -45,15 +45,12 @@ const CONTENT = [
 
 export function Overview() {
   return (
-    <section id="overview" className="mx-auto max-w-6xl px-6 py-16">
+    <section id="overview" className="py-16">
       <h2 className="text-center text-2xl font-bold tracking-tight">
         What we offer
       </h2>
-      <p className="mx-auto mt-2 max-w-xl text-center text-sm text-muted">
-        Scroll to explore each program at a glance.
-      </p>
       <div className="mt-10">
-        <StickyScroll content={CONTENT} />
+        <StickyScroll content={CONTENT} className="rounded-none" />
       </div>
     </section>
   );

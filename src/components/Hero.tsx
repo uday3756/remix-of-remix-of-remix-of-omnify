@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { SITE } from "@/data/nav";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import heroPhoto from "@/assets/intro/1.jpg.asset.json";
@@ -6,11 +7,18 @@ import heroPhoto from "@/assets/intro/1.jpg.asset.json";
  * Hero background options.
  *
  * Switch the look of the Hero section by changing `HERO_BACKGROUND` below:
- *   - { type: "color" }                              → solid brand color (original look)
- *   - { type: "image", src: "…" }                    → full-bleed photo background
- *   - { type: "video", src: "…", poster?: "…" }      → auto-playing, looping video background
+ *   - { type: "color" }                          → solid brand color (original look)
+ *   - { type: "image", src: "…" }                → full-bleed photo background
+ *   - { type: "video", src: "…", poster?: "…" }  → auto-playing, looping video background
  *
- * For image/video, upload an asset and reference its `url` (see `src/assets`).
+ * PHOTO: point `src` at any uploaded image asset's `url` (see `src/assets`).
+ *        Swap the import above (e.g. `2.jpg.asset.json` … `6.jpg.asset.json`)
+ *        to use a different gym photo.
+ *
+ * VIDEO: upload a video and set, for example,
+ *          { type: "video", src: "/hero-video.mp4", poster: heroPhoto.url }
+ *        (a file in `public/` is served at "/<filename>"). `poster` shows a
+ *        still image until the video is ready to play.
  */
 type HeroBackground =
   | { type: "color" }
@@ -23,7 +31,11 @@ const HERO_BACKGROUND: HeroBackground = {
 };
 
 function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
-  if (background.type === "color") return null;
+  // If the media fails to load, fall back to the solid brand color rather
+  // than showing a broken/empty hero.
+  const [failed, setFailed] = useState(false);
+
+  if (background.type === "color" || failed) return null;
 
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -33,6 +45,7 @@ function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
           alt=""
           aria-hidden
           className="h-full w-full object-cover"
+          onError={() => setFailed(true)}
         />
       ) : (
         <video
@@ -44,10 +57,12 @@ function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
           loop
           playsInline
           aria-hidden
+          onError={() => setFailed(true)}
         />
       )}
-      {/* Overlay keeps the text readable over any photo or video. */}
-      <div className="absolute inset-0 bg-foreground/70" />
+      {/* Gradient scrim: lets the photo/video show through while keeping the
+          headline and button readable. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/45 to-foreground/70" />
     </div>
   );
 }

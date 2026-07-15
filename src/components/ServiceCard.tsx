@@ -97,7 +97,7 @@ export function ServiceCard({ service }: { service: Service }) {
           <p>Trial: {service.trialPrice}</p>
           <p>{service.trialLength}</p>
         </div>
-        <div className="mt-auto grid grid-cols-2 gap-2 pt-1">
+        <div className="mt-auto grid grid-cols-2 gap-2 pt-1 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
           <button
             type="button"
             className="rounded-lg border border-border px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"

@@ -1,34 +1,38 @@
 import { useState } from "react";
 import { SITE } from "@/data/nav";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { useTheme } from "@/components/ThemeProvider";
+import type { HeroBgId } from "@/lib/theme";
 import heroPhoto from "@/assets/intro/1.jpg.asset.json";
 
 /**
- * Hero background options.
+ * Sources for the Hero background. The mode (default / image / video) is
+ * chosen live from the theme customizer (the 🎨 panel → "Hero background").
  *
- * Switch the look of the Hero section by changing `HERO_BACKGROUND` below:
- *   - { type: "color" }                          → solid brand color (original look)
- *   - { type: "image", src: "…" }                → full-bleed photo background
- *   - { type: "video", src: "…", poster?: "…" }  → auto-playing, looping video background
- *
- * PHOTO: point `src` at any uploaded image asset's `url` (see `src/assets`).
- *        Swap the import above (e.g. `2.jpg.asset.json` … `6.jpg.asset.json`)
- *        to use a different gym photo.
- *
- * VIDEO: upload a video and set, for example,
- *          { type: "video", src: "/hero-video.mp4", poster: heroPhoto.url }
- *        (a file in `public/` is served at "/<filename>"). `poster` shows a
- *        still image until the video is ready to play.
+ * PHOTO: swap the import above (`2.jpg.asset.json` … `6.jpg.asset.json`) to
+ *        use a different gym photo, or point at any uploaded asset's `url`.
+ * VIDEO: drop a file in `public/` (served at "/<filename>") and set
+ *        HERO_VIDEO_SRC below, or point it at an uploaded asset url. Until a
+ *        real video exists the "Video" option falls back to the brand color.
  */
+const HERO_IMAGE_SRC = heroPhoto.url;
+const HERO_VIDEO_SRC = "/hero-video.mp4";
+
 type HeroBackground =
   | { type: "color" }
   | { type: "image"; src: string }
   | { type: "video"; src: string; poster?: string };
 
-const HERO_BACKGROUND: HeroBackground = {
-  type: "image",
-  src: heroPhoto.url,
-};
+function resolveBackground(mode: HeroBgId): HeroBackground {
+  switch (mode) {
+    case "image":
+      return { type: "image", src: HERO_IMAGE_SRC };
+    case "video":
+      return { type: "video", src: HERO_VIDEO_SRC, poster: HERO_IMAGE_SRC };
+    default:
+      return { type: "color" };
+  }
+}
 
 function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
   // If the media fails to load, fall back to the solid brand color rather
@@ -68,6 +72,9 @@ function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
 }
 
 export function Hero() {
+  const { heroBg } = useTheme();
+  const background = resolveBackground(heroBg);
+
   const words = [
     { text: "Welcome" },
     { text: "to" },
@@ -75,7 +82,8 @@ export function Hero() {
   ];
   return (
     <section className="relative isolate bg-foreground text-background border-b border-border">
-      <HeroBackgroundLayer background={HERO_BACKGROUND} />
+      {/* key forces the failed-state to reset when the mode changes */}
+      <HeroBackgroundLayer key={heroBg} background={background} />
       <div className="mx-auto flex max-w-3xl flex-col items-center px-6 py-24 text-center sm:py-28">
         <p className="text-sm opacity-80 sm:text-base">
           The road to fitness starts from here

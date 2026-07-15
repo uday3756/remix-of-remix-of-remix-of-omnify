@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { SHAPES, THEMES } from "@/lib/theme";
+import { HERO_BACKGROUNDS, SHAPES, THEMES } from "@/lib/theme";
 import { useTheme } from "./ThemeProvider";
 
 export function ThemeSwitcher() {
   const [open, setOpen] = useState(false);
-  const { theme, shape, setTheme, setShape } = useTheme();
+  const { theme, shape, heroBg, setTheme, setShape, setHeroBg } = useTheme();
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -46,6 +46,27 @@ export function ThemeSwitcher() {
                 }`}
               >
                 {s.label}
+              </button>
+            ))}
+          </div>
+
+          <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-muted">
+            Hero background
+          </p>
+          <div className="mt-3 grid grid-cols-3 gap-2">
+            {HERO_BACKGROUNDS.map((bg) => (
+              <button
+                key={bg.id}
+                type="button"
+                onClick={() => setHeroBg(bg.id)}
+                aria-pressed={heroBg === bg.id}
+                className={`rounded-lg border px-3 py-2 text-xs font-medium transition-colors ${
+                  heroBg === bg.id
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border text-muted hover:border-primary/50"
+                }`}
+              >
+                {bg.label}
               </button>
             ))}
           </div>

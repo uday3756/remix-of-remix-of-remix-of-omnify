@@ -6,12 +6,16 @@ import {
   type ReactNode,
 } from "react";
 import {
+  DEFAULT_HERO_BG,
   DEFAULT_SHAPE,
   DEFAULT_THEME,
+  HERO_BG_STORAGE_KEY,
   SHAPE_STORAGE_KEY,
   THEME_STORAGE_KEY,
+  isHeroBgId,
   isShapeId,
   isThemeId,
+  type HeroBgId,
   type ShapeId,
   type ThemeId,
 } from "@/lib/theme";
@@ -19,8 +23,10 @@ import {
 interface ThemeContextValue {
   theme: ThemeId;
   shape: ShapeId;
+  heroBg: HeroBgId;
   setTheme: (theme: ThemeId) => void;
   setShape: (shape: ShapeId) => void;
+  setHeroBg: (heroBg: HeroBgId) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -28,12 +34,15 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeId>(DEFAULT_THEME);
   const [shape, setShapeState] = useState<ShapeId>(DEFAULT_SHAPE);
+  const [heroBg, setHeroBgState] = useState<HeroBgId>(DEFAULT_HERO_BG);
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
     const storedShape = window.localStorage.getItem(SHAPE_STORAGE_KEY);
+    const storedHeroBg = window.localStorage.getItem(HERO_BG_STORAGE_KEY);
     if (isThemeId(storedTheme)) setThemeState(storedTheme);
     if (isShapeId(storedShape)) setShapeState(storedShape);
+    if (isHeroBgId(storedHeroBg)) setHeroBgState(storedHeroBg);
   }, []);
 
   useEffect(() => {
@@ -54,8 +63,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     window.localStorage.setItem(SHAPE_STORAGE_KEY, next);
   };
 
+  const setHeroBg = (next: HeroBgId) => {
+    setHeroBgState(next);
+    window.localStorage.setItem(HERO_BG_STORAGE_KEY, next);
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, shape, setTheme, setShape }}>
+    <ThemeContext.Provider
+      value={{ theme, shape, heroBg, setTheme, setShape, setHeroBg }}
+    >
       {children}
     </ThemeContext.Provider>
   );

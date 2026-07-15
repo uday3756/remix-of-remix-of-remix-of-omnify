@@ -160,7 +160,8 @@ export function ServiceCard({ service }: { service: Service }) {
           ))}
         </div>
         <p className="text-sm font-bold">From {service.fromPrice}</p>
-        <div className="mt-auto pt-1">
+        <div className="mt-auto pt-1 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+
           <PrimaryButton>
             Book a party <span aria-hidden>→</span>
           </PrimaryButton>

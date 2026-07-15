@@ -1,4 +1,12 @@
-export type ThemeId = "default" | "sunset" | "forest" | "midnight";
+export type ThemeId =
+  | "default"
+  | "sunset"
+  | "forest"
+  | "midnight"
+  | "ocean"
+  | "coral"
+  | "noir"
+  | "cloud";
 export type ShapeId = "straight" | "wave" | "curve" | "angle";
 
 export interface ThemeDefinition {
@@ -17,6 +25,10 @@ export const THEMES: ThemeDefinition[] = [
   { id: "sunset", label: "Sunset", swatch: "#f97316" },
   { id: "forest", label: "Forest", swatch: "#059669" },
   { id: "midnight", label: "Midnight", swatch: "#7c3aed" },
+  { id: "ocean", label: "Ocean", swatch: "#1C7293" },
+  { id: "coral", label: "Coral Play", swatch: "#F96167" },
+  { id: "noir", label: "Noir Gold", swatch: "#C9A84C" },
+  { id: "cloud", label: "Cloud", swatch: "#3B82F6" },
 ];
 
 export const SHAPES: ShapeDefinition[] = [

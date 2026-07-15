@@ -4,8 +4,8 @@ export interface NavLink {
 }
 
 export const SITE = {
-  name: "My Gym Walnut Creek",
-  initials: "MG",
+  name: "[Your company]",
+  initials: " ",
   address: "Walnut Creek, California, 94598, United States",
   fullAddress: "2256 Oak Grove Road, Walnut Creek, California, 94598",
   timezone: "America/Los_Angeles",

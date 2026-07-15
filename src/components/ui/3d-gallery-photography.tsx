@@ -1,8 +1,30 @@
 import type React from 'react';
-import { Suspense, useRef, useMemo, useCallback, useState, useEffect } from 'react';
+import { Component, Suspense, useRef, useMemo, useCallback, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
+
+/**
+ * Catches render/loader errors thrown from inside the WebGL scene (most
+ * commonly a texture that fails to load) so a failed image can never crash
+ * the surrounding page. Renders `fallback` instead when that happens.
+ */
+class GalleryErrorBoundary extends Component<
+  { fallback: ReactNode; children: ReactNode },
+  { hasError: boolean }
+> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) return this.props.fallback;
+    return this.props.children;
+  }
+}
 
 type ImageItem = string | { src: string; alt?: string };
 
@@ -399,18 +421,20 @@ export default function InfiniteGallery({
 
   return (
     <div className={className} style={style}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 2]}>
-        <ambientLight intensity={0.8} />
-        <Suspense fallback={null}>
-          <GalleryScene
-            images={images}
-            speed={speed}
-            visibleCount={visibleCount}
-            fadeSettings={fadeSettings}
-            blurSettings={blurSettings}
-          />
-        </Suspense>
-      </Canvas>
+      <GalleryErrorBoundary fallback={null}>
+        <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 2]}>
+          <ambientLight intensity={0.8} />
+          <Suspense fallback={null}>
+            <GalleryScene
+              images={images}
+              speed={speed}
+              visibleCount={visibleCount}
+              fadeSettings={fadeSettings}
+              blurSettings={blurSettings}
+            />
+          </Suspense>
+        </Canvas>
+      </GalleryErrorBoundary>
     </div>
   );
 }

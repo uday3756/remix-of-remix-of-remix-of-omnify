@@ -22,21 +22,19 @@ export function IntroGallery({ onFinish }: { onFinish: () => void }) {
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    // Start timers after first paint so slow first-frame doesn't eat intro
+    let fadeTimer = 0;
+    let doneTimer = 0;
     const raf = requestAnimationFrame(() => {
-      var fadeTimer = window.setTimeout(() => setFadingOut(true), 5000);
-      var doneTimer = window.setTimeout(() => {
+      fadeTimer = window.setTimeout(() => setFadingOut(true), 5000);
+      doneTimer = window.setTimeout(() => {
         document.body.style.overflow = prevOverflow;
         onFinish();
       }, 5700);
-      (raf as unknown as { _t?: number[] })._t = [fadeTimer, doneTimer];
     });
-
     return () => {
       cancelAnimationFrame(raf);
-      const t = (raf as unknown as { _t?: number[] })._t;
-      if (t) t.forEach((id) => window.clearTimeout(id));
+      window.clearTimeout(fadeTimer);
+      window.clearTimeout(doneTimer);
       document.body.style.overflow = prevOverflow;
     };
   }, [onFinish]);

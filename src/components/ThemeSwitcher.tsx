@@ -1,18 +1,64 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { HERO_BACKGROUNDS, SHAPES, THEMES } from "@/lib/theme";
 import { useTheme } from "./ThemeProvider";
 
+// Generous but bounded — browsers cap localStorage at roughly 5–10MB per
+// origin, and a data URL is ~33% bigger than the raw file.
+const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+
+function readFileAsDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
 export function ThemeSwitcher() {
   const [open, setOpen] = useState(false);
-  const { theme, shape, heroBg, setTheme, setShape, setHeroBg } = useTheme();
+  const [uploadNotice, setUploadNotice] = useState<string | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
+  const {
+    theme,
+    shape,
+    heroBg,
+    customHeroImage,
+    customHeroVideo,
+    setTheme,
+    setShape,
+    setHeroBg,
+    setCustomHeroImage,
+    setCustomHeroVideo,
+  } = useTheme();
+
+  const handleUpload = async (
+    file: File | undefined,
+    apply: (dataUrl: string | null) => boolean,
+    kind: "photo" | "video",
+  ) => {
+    if (!file) return;
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setUploadNotice(
+        `That ${kind} is too large (max ${Math.round(MAX_UPLOAD_BYTES / 1024 / 1024)}MB). Try a smaller or more compressed file.`,
+      );
+      return;
+    }
+    const dataUrl = await readFileAsDataUrl(file);
+    const persisted = apply(dataUrl);
+    setUploadNotice(
+      persisted
+        ? null
+        : `Your ${kind} is applied for this visit, but is too large to remember after a reload.`,
+    );
+  };
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {open && (
-        <div className="mb-3 w-64 rounded-2xl border border-border bg-surface p-4 shadow-2xl">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-            Color theme
-          </p>
+        <div className="mb-3 w-72 rounded-2xl border border-border bg-surface p-4 shadow-2xl">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">Color theme</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {THEMES.map((t) => (
               <button
@@ -70,6 +116,74 @@ export function ThemeSwitcher() {
               </button>
             ))}
           </div>
+
+          <p className="mt-3 text-[11px] leading-snug text-muted">
+            Upload from your own device — saved to this browser only.
+          </p>
+          <div className="mt-2 flex flex-col gap-2">
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                void handleUpload(e.target.files?.[0], setCustomHeroImage, "photo");
+                e.target.value = "";
+              }}
+            />
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => imageInputRef.current?.click()}
+                className="flex-1 rounded-lg border border-border px-3 py-2 text-xs font-medium text-muted transition-colors hover:border-primary/50"
+              >
+                Upload photo
+              </button>
+              {customHeroImage && (
+                <button
+                  type="button"
+                  onClick={() => setCustomHeroImage(null)}
+                  aria-label="Remove uploaded photo"
+                  className="rounded-lg border border-border px-2 text-xs text-muted transition-colors hover:border-primary/50"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            <input
+              ref={videoInputRef}
+              type="file"
+              accept="video/*"
+              className="hidden"
+              onChange={(e) => {
+                void handleUpload(e.target.files?.[0], setCustomHeroVideo, "video");
+                e.target.value = "";
+              }}
+            />
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => videoInputRef.current?.click()}
+                className="flex-1 rounded-lg border border-border px-3 py-2 text-xs font-medium text-muted transition-colors hover:border-primary/50"
+              >
+                Upload video
+              </button>
+              {customHeroVideo && (
+                <button
+                  type="button"
+                  onClick={() => setCustomHeroVideo(null)}
+                  aria-label="Remove uploaded video"
+                  className="rounded-lg border border-border px-2 text-xs text-muted transition-colors hover:border-primary/50"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+          </div>
+          {uploadNotice && (
+            <p className="mt-2 text-[11px] leading-snug text-primary">{uploadNotice}</p>
+          )}
         </div>
       )}
 

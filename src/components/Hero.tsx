@@ -7,8 +7,11 @@ import heroPhoto from "@/assets/intro/1.jpg.asset.json";
 
 /**
  * Sources for the Hero background. The mode (default / image / video) is
- * chosen live from the theme customizer (the 🎨 panel → "Hero background").
+ * chosen live from the theme customizer (the 🎨 panel → "Hero background"),
+ * which also lets a visitor upload their own photo/video from their device
+ * (saved to their browser only — see ThemeProvider).
  *
+ * These are the fallbacks used when nothing has been uploaded:
  * PHOTO: swap the import above (`2.jpg.asset.json` … `6.jpg.asset.json`) to
  *        use a different gym photo, or point at any uploaded asset's `url`.
  * VIDEO: drop a file in `public/` (served at "/<filename>") and set
@@ -23,12 +26,20 @@ type HeroBackground =
   | { type: "image"; src: string }
   | { type: "video"; src: string; poster?: string };
 
-function resolveBackground(mode: HeroBgId): HeroBackground {
+function resolveBackground(
+  mode: HeroBgId,
+  customImage: string | null,
+  customVideo: string | null,
+): HeroBackground {
   switch (mode) {
     case "image":
-      return { type: "image", src: HERO_IMAGE_SRC };
+      return { type: "image", src: customImage ?? HERO_IMAGE_SRC };
     case "video":
-      return { type: "video", src: HERO_VIDEO_SRC, poster: HERO_IMAGE_SRC };
+      return {
+        type: "video",
+        src: customVideo ?? HERO_VIDEO_SRC,
+        poster: customImage ?? HERO_IMAGE_SRC,
+      };
     default:
       return { type: "color" };
   }
@@ -72,8 +83,8 @@ function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
 }
 
 export function Hero() {
-  const { heroBg } = useTheme();
-  const background = resolveBackground(heroBg);
+  const { heroBg, customHeroImage, customHeroVideo } = useTheme();
+  const background = resolveBackground(heroBg, customHeroImage, customHeroVideo);
 
   const words = [
     { text: "Welcome" },
@@ -82,8 +93,11 @@ export function Hero() {
   ];
   return (
     <section className="relative isolate bg-foreground text-background border-b border-border">
-      {/* key forces the failed-state to reset when the mode changes */}
-      <HeroBackgroundLayer key={heroBg} background={background} />
+      {/* key forces the failed-state to reset when the mode or source changes */}
+      <HeroBackgroundLayer
+        key={`${heroBg}:${background.type === "color" ? "" : background.src}`}
+        background={background}
+      />
       <div className="mx-auto flex max-w-3xl flex-col items-center px-6 py-24 text-center sm:py-28">
         <p className="text-sm opacity-80 sm:text-base">
           The road to fitness starts from here

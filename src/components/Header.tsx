@@ -6,6 +6,10 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
+
+  const toggleSection = (id: string) =>
+    setMobileSection((cur) => (cur === id ? null : id));
 
   return (
     <header className="shaped-edge shaped-header sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
@@ -103,17 +107,121 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <nav className="flex flex-col gap-0.5 border-t border-border px-6 py-3 lg:hidden">
-          <a href="/" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">Home</a>
-          <a href="#services" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">All services</a>
-          <a href="#services" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">Enrollments</a>
-          <a href="#class-cards" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">Class Cards</a>
-          <a href="#services" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">Camps</a>
-          <a href="#services" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">Parties</a>
-          <a href="#trials" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">Trials</a>
-          <a href="/calendar" className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface-alt hover:text-primary">Calendar</a>
+        <nav className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-border bg-surface px-4 py-3 lg:hidden">
+          <a
+            href="/"
+            onClick={() => setMobileOpen(false)}
+            className="block rounded-lg px-3 py-2.5 text-sm font-medium text-foreground hover:bg-surface-alt"
+          >
+            Home
+          </a>
+
+          <MobileSection
+            id="services"
+            label="Services"
+            open={mobileSection === "services"}
+            onToggle={() => toggleSection("services")}
+          >
+            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">All services</a>
+            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Enrollments</a>
+            <a href="#class-cards" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Class Cards</a>
+            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Camps</a>
+            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Parties</a>
+            <a href="#trials" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Trials</a>
+          </MobileSection>
+
+          <MobileSection
+            id="programs"
+            label="Programs"
+            open={mobileSection === "programs"}
+            onToggle={() => toggleSection("programs")}
+          >
+            <div className="grid grid-cols-2 gap-3 p-2">
+              <MobileProgram src="/yogamat.svg" title="Waddlers" desc="Beginner enrollment." onClick={() => setMobileOpen(false)} />
+              <MobileProgram src="/resistanceband.svg" title="Little Bunnies" desc="Intermediate class." onClick={() => setMobileOpen(false)} />
+              <MobileProgram src="/gymbag.svg" title="Champions" desc="Advanced training." onClick={() => setMobileOpen(false)} />
+              <MobileProgram src="/waterbottle.svg" title="Summer Camp" desc="Week-long camps." onClick={() => setMobileOpen(false)} />
+            </div>
+          </MobileSection>
+
+          <MobileSection
+            id="pricing"
+            label="Pricing"
+            open={mobileSection === "pricing"}
+            onToggle={() => toggleSection("pricing")}
+          >
+            <a href="#class-cards" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Class Cards</a>
+            <a href="#trials" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Free Trial</a>
+            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Enrollments</a>
+            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Party Packages</a>
+          </MobileSection>
+
+          <a
+            href="/calendar"
+            onClick={() => setMobileOpen(false)}
+            className="block rounded-lg px-3 py-2.5 text-sm font-medium text-foreground hover:bg-surface-alt"
+          >
+            Calendar
+          </a>
         </nav>
       )}
     </header>
+  );
+}
+
+function MobileSection({
+  label,
+  open,
+  onToggle,
+  children,
+}: {
+  id: string;
+  label: string;
+  open: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="border-b border-border last:border-0">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-foreground hover:bg-surface-alt"
+      >
+        {label}
+        <span
+          aria-hidden
+          className={`transition-transform ${open ? "rotate-180" : ""}`}
+        >
+          ▾
+        </span>
+      </button>
+      {open && <div className="pb-2 pl-2">{children}</div>}
+    </div>
+  );
+}
+
+function MobileProgram({
+  src,
+  title,
+  desc,
+  onClick,
+}: {
+  src: string;
+  title: string;
+  desc: string;
+  onClick: () => void;
+}) {
+  return (
+    <a
+      href="#services"
+      onClick={onClick}
+      className="flex flex-col gap-1 rounded-lg border border-border p-2 hover:border-primary/40"
+    >
+      <img src={src} alt={title} className="h-14 w-full rounded object-contain" />
+      <span className="text-sm font-semibold text-foreground">{title}</span>
+      <span className="text-xs text-muted">{desc}</span>
+    </a>
   );
 }

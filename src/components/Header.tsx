@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, MenuItem, HoveredLink, ProductItem } from "@/components/ui/navbar-menu";
 import { SITE } from "@/data/nav";
 import { cn } from "@/lib/utils";
@@ -6,9 +6,27 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  const [scrollBlur, setScrollBlur] = useState(0);
+  const headerRef = useRef<HTMLHeadElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // Increase blur: 0px blur at top, max 15px blur after 300px scroll
+      const blur = Math.min(scrollY / 20, 15);
+      setScrollBlur(blur);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="shaped-edge shaped-header sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
+    <header
+      ref={headerRef}
+      className="shaped-edge shaped-header sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur"
+      style={{ filter: `blur(${scrollBlur}px)` }}
+    >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-6">
         <a href="/" className="flex shrink-0 items-center gap-2.5 font-semibold">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">

@@ -163,6 +163,16 @@
 .shaped-edge {
   position: relative;
 }
+/* The header uses `.shaped-edge` (position: relative) together with Tailwind's
+   `.sticky` utility. Because `.shaped-edge` is emitted later in the cascade with
+   equal specificity, it would override `position: sticky` and the header would
+   scroll away instead of staying pinned (breaking the hide/reveal-on-scroll).
+   This more-specific rule restores sticky positioning for the header only —
+   the footer keeps `position: relative`. */
+.shaped-header.shaped-edge {
+  position: sticky;
+  top: 0;
+}
 .shaped-edge::after {
   content: "";
   position: absolute;

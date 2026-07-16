@@ -97,7 +97,7 @@ export function ServiceCard({ service }: { service: Service }) {
           <p>Trial: {service.trialPrice}</p>
           <p>{service.trialLength}</p>
         </div>
-        <div className="mt-auto grid grid-cols-2 gap-2 pt-1 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+        <div className="mt-auto grid grid-cols-2 gap-2 pt-1">
           <button
             type="button"
             className="rounded-lg border border-border px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
@@ -130,8 +130,7 @@ export function ServiceCard({ service }: { service: Service }) {
           </span>
           <span className="text-muted">/{service.unit}</span>
         </p>
-        <div className="mt-auto pt-1 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-
+        <div className="mt-auto pt-1">
           <PrimaryButton>
             Register <span aria-hidden>→</span>
           </PrimaryButton>
@@ -160,8 +159,7 @@ export function ServiceCard({ service }: { service: Service }) {
           ))}
         </div>
         <p className="text-sm font-bold">From {service.fromPrice}</p>
-        <div className="mt-auto pt-1 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-
+        <div className="mt-auto pt-1">
           <PrimaryButton>
             Book a party <span aria-hidden>→</span>
           </PrimaryButton>
@@ -183,7 +181,7 @@ export function ServiceCard({ service }: { service: Service }) {
         {service.optionsCount} options available
       </p>
       <p className="text-sm font-bold">From {service.fromPrice}</p>
-      <div className="mt-auto pt-1 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+      <div className="mt-auto pt-1">
         <PrimaryButton>
           Buy <span aria-hidden>→</span>
         </PrimaryButton>

@@ -246,7 +246,7 @@ export function CinematicFooter() {
       <style>{STYLES}</style>
       <footer
         ref={wrapperRef}
-        className="cinematic-footer-wrapper relative overflow-hidden bg-background text-foreground"
+        className="page-surface-light cinematic-footer-wrapper relative overflow-hidden bg-background text-foreground"
       >
         {/* Backgrounds */}
         <div className="pointer-events-none absolute inset-0 footer-bg-grid" />

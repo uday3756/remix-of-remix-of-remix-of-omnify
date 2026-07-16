@@ -45,12 +45,10 @@ const CONTENT = [
 
 export function Overview() {
   return (
-    <section id="overview" className="py-16">
-      <h2 className="text-center text-2xl font-bold tracking-tight">
-        What we offer
-      </h2>
+    <section id="overview" className="page-surface-light py-16">
+      <h2 className="text-center text-2xl font-bold tracking-tight">What we offer</h2>
       <div className="mt-10">
-        <StickyScroll content={CONTENT} className="rounded-none" />
+        <StickyScroll content={CONTENT} className="page-surface rounded-none" />
       </div>
     </section>
   );

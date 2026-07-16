@@ -8,6 +8,7 @@ import { Overview } from "@/components/Overview";
 import { ServicesExplorer } from "@/components/ServicesExplorer";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SiteBackground } from "@/components/SiteBackground";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -23,6 +24,7 @@ function Home() {
 
   return (
     <ThemeProvider>
+      <SiteBackground />
       {showIntro && <IntroGallery onFinish={() => setShowIntro(false)} />}
       <div className="flex min-h-screen flex-1 flex-col">
         <Header />
@@ -37,4 +39,3 @@ function Home() {
     </ThemeProvider>
   );
 }
-

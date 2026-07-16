@@ -199,6 +199,19 @@
   --font-mono: "Geist Mono", ui-monospace, monospace;
 }
 
+/* ---------- Page-wide background (data-page-bg on <html>) ----------
+   When a page-wide background (e.g. the animated Gradient) is active, the big
+   section surfaces become semi-transparent so the fixed SiteBackground shows
+   through the whole page. The wash keeps each block's text as readable as
+   before: light-text sections keep a foreground-tinted wash, dark-text
+   sections keep a background-tinted wash. */
+:root[data-page-bg] .page-surface {
+  background-color: color-mix(in oklch, var(--foreground) 62%, transparent) !important;
+}
+:root[data-page-bg] .page-surface-light {
+  background-color: color-mix(in oklch, var(--background) 68%, transparent) !important;
+}
+
 /* ---------- Shape variants driven by [data-shape] on <html> ---------- */
 .shaped-edge {
   position: relative;

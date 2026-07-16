@@ -7,16 +7,14 @@ export function ServicesExplorer() {
 
   const handleCategorySelect = (id: string) => {
     setFilter(id);
-    document
-      .getElementById("services")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("services")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
     <>
       <CategoryBrowse activeCategory={filter} onSelect={handleCategorySelect} />
 
-      <section id="services" className="scroll-mt-20 bg-foreground text-background">
+      <section id="services" className="page-surface scroll-mt-20 bg-foreground text-background">
         <div className="mx-auto max-w-6xl px-6 pb-20 pt-16">
           <h2 className="text-center text-2xl font-bold tracking-tight text-background">
             Our Services

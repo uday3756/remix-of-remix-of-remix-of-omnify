@@ -7,7 +7,7 @@ interface CategoryBrowseProps {
 
 export function CategoryBrowse({ activeCategory, onSelect }: CategoryBrowseProps) {
   return (
-    <section className="bg-foreground text-background">
+    <section className="page-surface bg-foreground text-background">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <h2 className="text-center text-2xl font-bold tracking-tight text-background">
           Browse by Category

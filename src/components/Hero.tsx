@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { SITE } from "@/data/nav";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-import { GradientWave } from "@/components/ui/gradient-wave";
 import { useTheme } from "@/components/ThemeProvider";
-import { HERO_GRADIENT_COLORS, type HeroBgId, type ThemeId } from "@/lib/theme";
+import type { HeroBgId } from "@/lib/theme";
 import heroPhoto from "@/assets/intro/1.jpg.asset.json";
 
 /**
@@ -25,14 +24,12 @@ const HERO_VIDEO_SRC = "/hero-video.mp4";
 type HeroBackground =
   | { type: "color" }
   | { type: "image"; src: string }
-  | { type: "video"; src: string; poster?: string }
-  | { type: "gradient"; colors: string[] };
+  | { type: "video"; src: string; poster?: string };
 
 function resolveBackground(
   mode: HeroBgId,
   customImage: string | null,
   customVideo: string | null,
-  gradientColors: string[],
 ): HeroBackground {
   switch (mode) {
     case "image":
@@ -43,8 +40,8 @@ function resolveBackground(
         src: customVideo ?? HERO_VIDEO_SRC,
         poster: customImage ?? HERO_IMAGE_SRC,
       };
-    case "gradient":
-      return { type: "gradient", colors: gradientColors };
+    // "gradient" is a page-wide background handled by <SiteBackground/>; the
+    // hero itself stays transparent (washed) so the page gradient shows through.
     default:
       return { type: "color" };
   }
@@ -67,7 +64,7 @@ function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
           className="h-full w-full object-cover"
           onError={() => setFailed(true)}
         />
-      ) : background.type === "video" ? (
+      ) : (
         <video
           className="h-full w-full object-cover"
           src={background.src}
@@ -79,24 +76,17 @@ function HeroBackgroundLayer({ background }: { background: HeroBackground }) {
           aria-hidden
           onError={() => setFailed(true)}
         />
-      ) : (
-        // Animated WebGL gradient tinted with the active theme palette so it
-        // blends with the header and footer. (darkenTop is left off — it only
-        // subtracts the green channel, which tints neutral/grayscale themes
-        // magenta; the scrim below handles top contrast instead.)
-        <GradientWave colors={background.colors} />
       )}
-      {/* Gradient scrim: lets the photo/video/gradient show through while
-          keeping the headline and button readable. */}
+      {/* Gradient scrim: lets the photo/video show through while keeping the
+          headline and button readable. */}
       <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/45 to-foreground/70" />
     </div>
   );
 }
 
 export function Hero() {
-  const { heroBg, customHeroImage, customHeroVideo, theme } = useTheme();
-  const gradientColors = HERO_GRADIENT_COLORS[theme as ThemeId] ?? HERO_GRADIENT_COLORS.default;
-  const background = resolveBackground(heroBg, customHeroImage, customHeroVideo, gradientColors);
+  const { heroBg, customHeroImage, customHeroVideo } = useTheme();
+  const background = resolveBackground(heroBg, customHeroImage, customHeroVideo);
 
   const words = [
     { text: "Welcome" },
@@ -104,12 +94,10 @@ export function Hero() {
     { text: SITE.name, className: "text-primary" },
   ];
   return (
-    <section className="relative isolate bg-foreground text-background border-b border-border">
+    <section className="page-surface relative isolate border-b border-border bg-foreground text-background">
       {/* key forces the failed-state to reset when the mode or source changes */}
       <HeroBackgroundLayer
-        key={`${heroBg}:${
-          background.type === "image" || background.type === "video" ? background.src : ""
-        }`}
+        key={`${heroBg}:${background.type === "color" ? "" : background.src}`}
         background={background}
       />
       <div className="mx-auto flex max-w-3xl flex-col items-center px-6 py-24 text-center sm:py-28">

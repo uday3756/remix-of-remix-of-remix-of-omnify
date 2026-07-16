@@ -75,6 +75,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     document.documentElement.setAttribute("data-shape", shape);
   }, [shape]);
 
+  useEffect(() => {
+    // "gradient" is a page-wide background: flag it so the content sections
+    // become semi-transparent (see styles.css) and the fixed SiteBackground
+    // shows through. Other modes (image/video) stay hero-local.
+    if (heroBg === "gradient") {
+      document.documentElement.setAttribute("data-page-bg", heroBg);
+    } else {
+      document.documentElement.removeAttribute("data-page-bg");
+    }
+  }, [heroBg]);
+
   const setTheme = (next: ThemeId) => {
     setThemeState(next);
     window.localStorage.setItem(THEME_STORAGE_KEY, next);

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useMotionValueEvent, useScroll, motion } from "motion/react";
+import { useMotionValueEvent, useScroll, motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export const StickyScroll = ({
@@ -93,7 +93,19 @@ export const StickyScroll = ({
           contentClassName,
         )}
       >
-        {content[activeCard].content ?? null}
+        {/* Crossfade the active card's content as you scroll between items. */}
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={activeCard}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.99 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            {content[activeCard].content ?? null}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </motion.div>
   );

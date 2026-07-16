@@ -102,20 +102,20 @@
   --accent-foreground: #3a2a05;
 }
 
-:root[data-theme="noir"] {
-  --background: #0d0d0d;
-  --foreground: #f5f0e0;
-  --surface: #1a1a1a;
-  --surface-alt: #232323;
-  --border: #2f2a1e;
-  --muted: #b7ad8c;
+:root[data-theme="berry"] {
+  --background: #fff1f8;
+  --foreground: #3b0a2b;
+  --surface: #ffffff;
+  --surface-alt: #ffe4f1;
+  --border: #fbcfe8;
+  --muted: #86336a;
 
-  --primary: #C9A84C;
-  --primary-foreground: #1a1400;
-  --secondary: #f0d78c;
-  --secondary-foreground: #1a1400;
-  --accent: #e2b64a;
-  --accent-foreground: #1a1400;
+  --primary: #db2777;
+  --primary-foreground: #ffffff;
+  --secondary: #a21caf;
+  --secondary-foreground: #ffffff;
+  --accent: #f472b6;
+  --accent-foreground: #3b0a2b;
 }
 
 :root[data-theme="cloud"] {

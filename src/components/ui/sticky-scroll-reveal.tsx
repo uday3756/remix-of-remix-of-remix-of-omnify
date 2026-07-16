@@ -59,38 +59,38 @@ export const StickyScroll = ({
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
       className={cn(
-        "relative flex h-[30rem] w-full justify-center space-x-10 overflow-y-auto rounded-2xl p-10 no-scrollbar",
+        "relative flex h-[30rem] w-full flex-col-reverse justify-center gap-6 overflow-y-auto rounded-2xl p-5 sm:flex-row sm:gap-10 sm:p-10 no-scrollbar",
         className,
       )}
       ref={ref}
     >
-      <div className="div relative flex items-start px-4">
-        <div className="max-w-2xl">
+      <div className="relative flex min-w-0 flex-1 items-start px-0 sm:px-4">
+        <div className="w-full max-w-2xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
+            <div key={item.title + index} className="my-10 sm:my-20">
               <motion.h2
                 initial={{ opacity: 0 }}
                 animate={{ opacity: activeCard === index ? 1 : 0.3 }}
-                className="text-2xl font-bold text-slate-100"
+                className="text-xl font-bold text-slate-100 sm:text-2xl"
               >
                 {item.title}
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: activeCard === index ? 1 : 0.3 }}
-                className="text-kg mt-10 max-w-sm text-slate-300"
+                className="mt-4 max-w-sm text-sm leading-relaxed text-slate-300 sm:mt-8 sm:text-base"
               >
                 {item.description}
               </motion.p>
             </div>
           ))}
-          <div className="h-40" />
+          <div className="h-24 sm:h-40" />
         </div>
       </div>
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-4 h-40 w-full shrink-0 self-start overflow-hidden rounded-xl bg-white sm:top-10 sm:h-60 sm:w-80",
           contentClassName,
         )}
       >

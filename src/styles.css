@@ -377,316 +377,65 @@
   }
 }
 
-/* Neo-Brutalist custom styles */
-:root {
-  --font-cabinet: "Cabinet Grotesk", system-ui, sans-serif;
-  --font-satoshi: "Satoshi", system-ui, sans-serif;
-  --neo-yellow: #ffe17c;
-  --neo-charcoal: #171e19;
-  --neo-sage: #b7c6c2;
-  --neo-black: #000000;
-  --neo-white: #ffffff;
-  --hard-shadow-sm: 4px 4px 0px 0px #000000;
-  --hard-shadow-md: 8px 8px 0px 0px #000000;
-}
+/* ============================================================
+   Obsidian — dark-mode-first "Obsidian & Lime" reskin.
+   A full color + font theme: every existing section, card and
+   animation stays in place and is simply re-dressed via the shared
+   CSS variables (background/foreground/surface/border/primary…).
+   ============================================================ */
+:root[data-theme="obsidian"] {
+  --background: #0a0a0a;
+  --foreground: #ebebeb;
+  --surface: #101010;
+  --surface-alt: #181818;
+  --border: #272727;
+  --muted: #9a9a9a;
 
-.font-cabinet {
-  font-family: var(--font-cabinet);
-}
+  --primary: #ccff00;
+  --primary-foreground: #0a0a0a;
+  --primary-soft: #1b2400;
+  --secondary: #10b981;
+  --secondary-foreground: #04231a;
+  --accent: #ccff00;
+  --accent-foreground: #0a0a0a;
 
-.font-satoshi {
-  font-family: var(--font-satoshi);
-}
+  --party: #10b981;
+  --party-foreground: #04231a;
 
-.text-cabinet {
-  font-family: var(--font-cabinet);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.text-satoshi {
-  font-family: var(--font-satoshi);
-  font-weight: 500;
-}
-
-/* Hard shadows */
-.shadow-hard-sm {
-  box-shadow: var(--hard-shadow-sm);
-}
-
-.shadow-hard-md {
-  box-shadow: var(--hard-shadow-md);
-}
-
-/* Radial dot pattern at 10% opacity */
-.pattern-dots-32 {
-  background-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.1) 1.5px,
-    transparent 1.5px
-  );
-  background-size: 32px 32px;
-}
-
-/* Glow step indicators */
-.glow-sage {
-  box-shadow: 0 0 0 4px var(--neo-sage), var(--hard-shadow-md);
-}
-
-.glow-yellow {
-  box-shadow: 0 0 0 4px var(--neo-yellow), var(--hard-shadow-md);
-}
-
-.glow-white {
-  box-shadow: 0 0 0 4px var(--neo-white), var(--hard-shadow-md);
-}
-
-/* Asymmetric rounded card */
-.asymmetric-card {
-  border: 2px solid var(--neo-black);
-  background: var(--neo-white);
-  border-top-right-radius: 1.875rem;
-  border-bottom-left-radius: 1.875rem;
-  border-top-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-  padding: 2rem;
-  box-shadow: var(--hard-shadow-sm);
-}
-
-/* Utility header styling */
-.neo-header {
-  background: var(--neo-yellow);
-  border-bottom: 2px solid var(--neo-black);
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-}
-
-.neo-header-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.neo-header-logo-square {
-  width: 10px;
-  height: 10px;
-  background: var(--neo-black);
-}
-
-.neo-header-nav {
-  display: flex;
-  gap: 2rem;
-  font-family: var(--font-satoshi);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.neo-header-nav a {
-  color: var(--neo-black);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s;
-}
-
-.neo-header-nav a:hover {
-  border-bottom: 2px solid var(--neo-black);
-}
-
-/* Neo-brutalist primary button */
-.neo-btn-primary {
-  background: var(--neo-black);
-  color: var(--neo-white);
-  border: 2px solid var(--neo-black);
-  box-shadow: var(--hard-shadow-md);
-  padding: 1rem 2rem;
-  font-family: var(--font-satoshi);
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-}
-
-.neo-btn-primary:hover {
-  transform: translate(4px, 4px);
-  box-shadow: 4px 4px 0px 0px var(--neo-black);
-}
-
-.neo-btn-secondary {
-  background: var(--neo-white);
-  color: var(--neo-black);
-  border: 2px solid var(--neo-black);
-  box-shadow: var(--hard-shadow-sm);
-  padding: 1rem 2rem;
-  font-family: var(--font-satoshi);
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-}
-
-.neo-btn-secondary:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px 0px var(--neo-black);
-}
-
-/* Marquee animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee {
-  animation: marquee 20s linear infinite;
-}
-
-/* Transparent text with black stroke */
-.text-stroke {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--neo-black);
-  text-stroke: 2px var(--neo-black);
+  /* Space Grotesk everywhere; JetBrains Mono for any mono labels. */
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 }
 
 /* ============================================================
-   Obsidian & Lime — glassmorphism design system
+   NeoBrutalist — bright "Yellow & Charcoal" reskin.
+   Signature golden-yellow canvas, near-black text, solid black
+   borders and white cards. Content is untouched; only the theme
+   variables and fonts change.
    ============================================================ */
-:root {
-  --font-space: "Space Grotesk", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --obs-black: #000000;
-  --obs-surface: #0c0c0c;
-  --obs-lime: #ccff00;
-  --obs-emerald: #10b981;
-  --obs-white: #ebebeb;
-}
+:root[data-theme="neobrutalist"] {
+  --background: #ffe17c;
+  --foreground: #171e19;
+  --surface: #ffffff;
+  --surface-alt: #fff2c0;
+  --border: #000000;
+  --muted: #3f3f3f;
 
-.font-space {
-  font-family: var(--font-space);
-}
+  --primary: #171e19;
+  --primary-foreground: #ffffff;
+  --primary-soft: #fff2c0;
+  --secondary: #171e19;
+  --secondary-foreground: #ffffff;
+  --accent: #171e19;
+  --accent-foreground: #ffe17c;
 
-.font-jetmono {
-  font-family: var(--font-mono);
-}
+  --party: #171e19;
+  --party-foreground: #ffffff;
 
-/* Glass floating card */
-.obs-glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-}
-
-/* Floating animation */
-@keyframes obs-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.obs-float-anim {
-  animation: obs-float 6s ease-in-out infinite;
-}
-
-.obs-float-anim-delay {
-  animation: obs-float 6s ease-in-out infinite;
-  animation-delay: 2s;
-}
-
-/* Neon pulse button */
-.obs-btn-neon {
-  background-color: var(--obs-lime);
-  color: var(--obs-black);
-  font-weight: 700;
-  border-radius: 9999px;
-  padding: 1rem 2rem;
-  box-shadow: 0 0 30px rgba(204, 255, 0, 0.3);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: var(--font-space);
-  cursor: pointer;
-}
-
-.obs-btn-neon:hover {
-  transform: scale(1.05);
-}
-
-/* System status tag */
-.obs-status-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 10px;
-  color: rgba(235, 235, 235, 0.6);
-}
-
-.obs-status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--obs-lime);
-  animation: obs-pulse 2s infinite;
-  flex-shrink: 0;
-}
-
-@keyframes obs-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-}
-
-/* 60px grid pattern */
-.obs-grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* Glow spheres */
-.obs-glow-lime {
-  background: radial-gradient(circle, rgba(204, 255, 0, 0.25) 0%, transparent 70%);
-  filter: blur(120px);
-}
-
-.obs-glow-emerald {
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
-  filter: blur(120px);
-}
-
-/* Gradient text (lime -> white), italic */
-.obs-gradient-text {
-  background: linear-gradient(120deg, var(--obs-lime), var(--obs-white));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-style: italic;
-}
-
-/* Noise overlay */
-.obs-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.15;
+  /* Real faces load from Fontshare; if that ever fails they degrade to the
+     already-loaded Google faces (Space Grotesk / Inter) so the theme still
+     reads as intentional rather than falling back to a bare system font. */
+  --font-sans: "Satoshi", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cabinet Grotesk", "Space Grotesk", "Satoshi", ui-sans-serif, system-ui, sans-serif;
 }

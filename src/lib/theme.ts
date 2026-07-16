@@ -8,16 +8,11 @@ export type ThemeId =
   | "berry"
   | "cloud"
   | "noir"
-  | "snow";
+  | "snow"
+  | "obsidian"
+  | "neobrutalist";
 export type ShapeId = "straight" | "wave" | "curve" | "angle";
-export type HeroBgId =
-  | "default"
-  | "image"
-  | "video"
-  | "gradient"
-  | "saas"
-  | "neobrutalist"
-  | "obsidian";
+export type HeroBgId = "default" | "image" | "video" | "gradient";
 
 export interface ThemeDefinition {
   id: ThemeId;
@@ -46,6 +41,8 @@ export const THEMES: ThemeDefinition[] = [
   { id: "midnight", label: "Midnight", swatch: "#7c3aed" },
   { id: "noir", label: "Black", swatch: "#000000" },
   { id: "snow", label: "White", swatch: "#ffffff" },
+  { id: "obsidian", label: "Obsidian", swatch: "#ccff00" },
+  { id: "neobrutalist", label: "NeoBrutalist", swatch: "#ffe17c" },
 ];
 
 export const SHAPES: ShapeDefinition[] = [
@@ -60,9 +57,6 @@ export const HERO_BACKGROUNDS: HeroBgDefinition[] = [
   { id: "image", label: "Image" },
   { id: "video", label: "Video" },
   { id: "gradient", label: "Gradient" },
-  { id: "saas", label: "SaaS" },
-  { id: "neobrutalist", label: "NeoBrutalist" },
-  { id: "obsidian", label: "Obsidian" },
 ];
 
 // Palette used by the animated "Gradient" hero background, per theme, so the
@@ -80,6 +74,8 @@ export const HERO_GRADIENT_COLORS: Record<ThemeId, string[]> = {
   cloud: ["#3b82f6", "#1e3a5f", "#f59e0b", "#3b82f6"],
   noir: ["#3f3f46", "#71717a", "#a1a1aa", "#52525b"],
   snow: ["#0a0a0a", "#3f3f46", "#52525b", "#18181b"],
+  obsidian: ["#0a0a0a", "#ccff00", "#10b981", "#0a0a0a"],
+  neobrutalist: ["#ffe17c", "#171e19", "#ffffff", "#ffe17c"],
 };
 
 export const DEFAULT_THEME: ThemeId = "default";

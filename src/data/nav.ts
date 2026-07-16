@@ -10,6 +10,8 @@ export const SITE = {
   fullAddress: "2256 Oak Grove Road, Walnut Creek, California, 94598",
   timezone: "America/Los_Angeles",
   email: "walnutcreek@test.com",
+  // Dummy placeholder — swap for the real number when available.
+  phone: "(925) 555-0142",
 };
 
 export const NAV_LINKS: NavLink[] = [

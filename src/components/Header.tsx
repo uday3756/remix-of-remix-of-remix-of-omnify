@@ -58,6 +58,38 @@ export function Header() {
           : "border-border bg-surface/95 backdrop-blur",
       )}
     >
+      {/* Utility ribbon: quick contact + account links, above the main nav.
+          Lives inside the sticky header so it hides/reveals on scroll too. */}
+      <div className="border-b border-border/50 bg-foreground text-background">
+        <div className="mx-auto flex h-9 max-w-6xl items-center justify-between gap-4 px-6 text-[11px] sm:text-xs">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <a
+              href={`tel:${SITE.phone.replace(/[^\d+]/g, "")}`}
+              className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-80"
+            >
+              <span aria-hidden>📞</span>
+              <span>{SITE.phone}</span>
+            </a>
+            <a
+              href={`https://maps.google.com/?q=${encodeURIComponent(SITE.fullAddress)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-80"
+            >
+              <span aria-hidden>📍</span>
+              <span>Visit us</span>
+            </a>
+          </div>
+          <a
+            href="/sign-in"
+            className="inline-flex items-center gap-1.5 font-medium transition-opacity hover:opacity-80"
+          >
+            <span aria-hidden>👤</span>
+            <span>My acc</span>
+          </a>
+        </div>
+      </div>
+
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-6">
         <a href="/" className="flex shrink-0 items-center gap-2.5 font-semibold">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">

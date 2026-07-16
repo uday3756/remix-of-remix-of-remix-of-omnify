@@ -4,6 +4,7 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { useTheme } from "@/components/ThemeProvider";
 import type { HeroBgId } from "@/lib/theme";
 import heroPhoto from "@/assets/intro/1.jpg.asset.json";
+import { NeoBrutalistHero } from "@/components/NeoBrutalistHero";
 
 /**
  * Sources for the Hero background. The mode (default / image / video) is
@@ -161,6 +162,7 @@ export function Hero() {
   const { heroBg, customHeroImage, customHeroVideo } = useTheme();
 
   if (heroBg === "saas") return <SaasHero />;
+  if (heroBg === "neobrutalist") return <NeoBrutalistHero />;
 
   const background = resolveBackground(heroBg, customHeroImage, customHeroVideo);
 

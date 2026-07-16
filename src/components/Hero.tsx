@@ -5,6 +5,7 @@ import { useTheme } from "@/components/ThemeProvider";
 import type { HeroBgId } from "@/lib/theme";
 import heroPhoto from "@/assets/intro/1.jpg.asset.json";
 import { NeoBrutalistHero } from "@/components/NeoBrutalistHero";
+import { ObsidianHero } from "@/components/ObsidianHero";
 
 /**
  * Sources for the Hero background. The mode (default / image / video) is
@@ -163,6 +164,7 @@ export function Hero() {
 
   if (heroBg === "saas") return <SaasHero />;
   if (heroBg === "neobrutalist") return <NeoBrutalistHero />;
+  if (heroBg === "obsidian") return <ObsidianHero />;
 
   const background = resolveBackground(heroBg, customHeroImage, customHeroVideo);
 

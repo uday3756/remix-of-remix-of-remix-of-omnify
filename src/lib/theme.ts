@@ -10,7 +10,14 @@ export type ThemeId =
   | "noir"
   | "snow";
 export type ShapeId = "straight" | "wave" | "curve" | "angle";
-export type HeroBgId = "default" | "image" | "video" | "gradient" | "saas" | "neobrutalist";
+export type HeroBgId =
+  | "default"
+  | "image"
+  | "video"
+  | "gradient"
+  | "saas"
+  | "neobrutalist"
+  | "obsidian";
 
 export interface ThemeDefinition {
   id: ThemeId;
@@ -55,6 +62,7 @@ export const HERO_BACKGROUNDS: HeroBgDefinition[] = [
   { id: "gradient", label: "Gradient" },
   { id: "saas", label: "SaaS" },
   { id: "neobrutalist", label: "NeoBrutalist" },
+  { id: "obsidian", label: "Obsidian" },
 ];
 
 // Palette used by the animated "Gradient" hero background, per theme, so the

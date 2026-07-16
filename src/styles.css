@@ -558,3 +558,135 @@
   -webkit-text-stroke: 2px var(--neo-black);
   text-stroke: 2px var(--neo-black);
 }
+
+/* ============================================================
+   Obsidian & Lime — glassmorphism design system
+   ============================================================ */
+:root {
+  --font-space: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --obs-black: #000000;
+  --obs-surface: #0c0c0c;
+  --obs-lime: #ccff00;
+  --obs-emerald: #10b981;
+  --obs-white: #ebebeb;
+}
+
+.font-space {
+  font-family: var(--font-space);
+}
+
+.font-jetmono {
+  font-family: var(--font-mono);
+}
+
+/* Glass floating card */
+.obs-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+}
+
+/* Floating animation */
+@keyframes obs-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.obs-float-anim {
+  animation: obs-float 6s ease-in-out infinite;
+}
+
+.obs-float-anim-delay {
+  animation: obs-float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Neon pulse button */
+.obs-btn-neon {
+  background-color: var(--obs-lime);
+  color: var(--obs-black);
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 1rem 2rem;
+  box-shadow: 0 0 30px rgba(204, 255, 0, 0.3);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-space);
+  cursor: pointer;
+}
+
+.obs-btn-neon:hover {
+  transform: scale(1.05);
+}
+
+/* System status tag */
+.obs-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 10px;
+  color: rgba(235, 235, 235, 0.6);
+}
+
+.obs-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--obs-lime);
+  animation: obs-pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes obs-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* 60px grid pattern */
+.obs-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glow spheres */
+.obs-glow-lime {
+  background: radial-gradient(circle, rgba(204, 255, 0, 0.25) 0%, transparent 70%);
+  filter: blur(120px);
+}
+
+.obs-glow-emerald {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+  filter: blur(120px);
+}
+
+/* Gradient text (lime -> white), italic */
+.obs-gradient-text {
+  background: linear-gradient(120deg, var(--obs-lime), var(--obs-white));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+/* Noise overlay */
+.obs-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+}

@@ -2,9 +2,11 @@ import { useRef, useState } from "react";
 import { HERO_BACKGROUNDS, SHAPES, THEMES } from "@/lib/theme";
 import { useTheme } from "./ThemeProvider";
 
-// Generous but bounded — browsers cap localStorage at roughly 5–10MB per
-// origin, and a data URL is ~33% bigger than the raw file.
-const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+// Photos are stored as data URLs so they survive a reload (bounded by
+// localStorage quota). Videos are usually too big for that — we use a
+// blob URL which handles any file size but is session-only.
+const MAX_PHOTO_BYTES = 4 * 1024 * 1024;
+const MAX_VIDEO_BYTES = 200 * 1024 * 1024;
 
 function readFileAsDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -35,23 +37,33 @@ export function ThemeSwitcher() {
 
   const handleUpload = async (
     file: File | undefined,
-    apply: (dataUrl: string | null) => boolean,
+    apply: (url: string | null) => boolean,
     kind: "photo" | "video",
   ) => {
     if (!file) return;
-    if (file.size > MAX_UPLOAD_BYTES) {
+    const limit = kind === "photo" ? MAX_PHOTO_BYTES : MAX_VIDEO_BYTES;
+    if (file.size > limit) {
       setUploadNotice(
-        `That ${kind} is too large (max ${Math.round(MAX_UPLOAD_BYTES / 1024 / 1024)}MB). Try a smaller or more compressed file.`,
+        `That ${kind} is too large (max ${Math.round(limit / 1024 / 1024)}MB).`,
       );
       return;
     }
-    const dataUrl = await readFileAsDataUrl(file);
-    const persisted = apply(dataUrl);
-    setUploadNotice(
-      persisted
-        ? null
-        : `Your ${kind} is applied for this visit, but is too large to remember after a reload.`,
-    );
+    // Photos: try data URL so they survive reloads. Videos: always blob URL.
+    if (kind === "photo") {
+      const dataUrl = await readFileAsDataUrl(file);
+      const persisted = apply(dataUrl);
+      setUploadNotice(
+        persisted
+          ? null
+          : `Your photo is applied for this visit, but is too large to remember after a reload.`,
+      );
+    } else {
+      const blobUrl = URL.createObjectURL(file);
+      apply(blobUrl);
+      setUploadNotice(
+        `Your video is playing for this visit (blob URLs can't be saved after a reload).`,
+      );
+    }
   };
 
   return (

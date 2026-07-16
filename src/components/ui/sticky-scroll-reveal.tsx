@@ -63,13 +63,41 @@ export const StickyScroll = ({
         style={{ backgroundColor: "var(--foreground)" }}
       >
         {content.map((item, index) => (
-          <div key={item.title + index} className="overflow-hidden">
-            <div className="relative h-44 w-full overflow-hidden rounded-xl">
+          <motion.div
+            key={item.title + index}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div
+              initial={{ scale: 1.08 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="relative h-44 w-full overflow-hidden rounded-xl"
+            >
               {item.content ?? null}
-            </div>
-            <h2 className="mt-4 text-xl font-bold text-background">{item.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-background/80">{item.description}</p>
-          </div>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
+              className="mt-4 text-xl font-bold text-background"
+            >
+              {item.title}
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.45, ease: "easeOut", delay: 0.18 }}
+              className="mt-2 text-sm leading-relaxed text-background/80"
+            >
+              {item.description}
+            </motion.p>
+          </motion.div>
         ))}
       </div>
 

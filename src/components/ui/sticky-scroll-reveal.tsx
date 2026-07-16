@@ -53,16 +53,37 @@ export const StickyScroll = ({
   }, [activeCard]);
 
   return (
-    <motion.div
-      animate={{
-        backgroundColor: backgroundColors[activeCard % backgroundColors.length],
-      }}
-      className={cn(
-        "relative flex h-[30rem] w-full flex-col-reverse justify-center gap-6 overflow-y-auto rounded-2xl p-5 sm:flex-row sm:gap-10 sm:p-10 no-scrollbar",
-        className,
-      )}
-      ref={ref}
-    >
+    <>
+      {/* Mobile: a simple stacked list. The desktop sticky-scroll relies on a
+          nested scroll container + a pinned card, which overlaps and traps
+          scrolling on small screens — so on mobile we just show each offering
+          as a normal card (photo on top, text below) in the page flow. */}
+      <div
+        className={cn("flex flex-col gap-6 rounded-2xl p-5 sm:hidden", className)}
+        style={{ backgroundColor: "var(--foreground)" }}
+      >
+        {content.map((item, index) => (
+          <div key={item.title + index} className="overflow-hidden">
+            <div className="relative h-44 w-full overflow-hidden rounded-xl">
+              {item.content ?? null}
+            </div>
+            <h2 className="mt-4 text-xl font-bold text-background">{item.title}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-background/80">{item.description}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: the sticky-scroll reveal. */}
+      <motion.div
+        animate={{
+          backgroundColor: backgroundColors[activeCard % backgroundColors.length],
+        }}
+        className={cn(
+          "relative hidden h-[30rem] w-full justify-center gap-10 overflow-y-auto rounded-2xl p-10 no-scrollbar sm:flex sm:flex-row",
+          className,
+        )}
+        ref={ref}
+      >
       <div className="relative flex min-w-0 flex-1 items-start px-0 sm:px-4">
         <div className="w-full max-w-2xl">
           {content.map((item, index) => (
@@ -107,6 +128,7 @@ export const StickyScroll = ({
           </motion.div>
         </AnimatePresence>
       </div>
-    </motion.div>
+      </motion.div>
+    </>
   );
 };

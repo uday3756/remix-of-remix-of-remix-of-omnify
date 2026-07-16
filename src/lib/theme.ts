@@ -5,7 +5,7 @@ export type ThemeId =
   | "midnight"
   | "ocean"
   | "coral"
-  | "noir"
+  | "berry"
   | "cloud";
 export type ShapeId = "straight" | "wave" | "curve" | "angle";
 export type HeroBgId = "default" | "image" | "video";
@@ -27,14 +27,14 @@ export interface HeroBgDefinition {
 }
 
 export const THEMES: ThemeDefinition[] = [
-  { id: "default", label: "Default", swatch: "#2563eb" },
+  { id: "default", label: "Violet", swatch: "#5b3fd6" },
   { id: "sunset", label: "Sunset", swatch: "#f97316" },
   { id: "forest", label: "Forest", swatch: "#059669" },
-  { id: "midnight", label: "Midnight", swatch: "#7c3aed" },
   { id: "ocean", label: "Ocean", swatch: "#1C7293" },
-  { id: "coral", label: "Coral Play", swatch: "#F96167" },
-  { id: "noir", label: "Noir Gold", swatch: "#C9A84C" },
+  { id: "coral", label: "Coral", swatch: "#F96167" },
+  { id: "berry", label: "Berry", swatch: "#db2777" },
   { id: "cloud", label: "Cloud", swatch: "#3B82F6" },
+  { id: "midnight", label: "Midnight", swatch: "#7c3aed" },
 ];
 
 export const SHAPES: ShapeDefinition[] = [

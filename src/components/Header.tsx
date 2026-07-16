@@ -6,18 +6,27 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
-  const [scrollBlur, setScrollBlur] = useState(0);
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
-  const headerRef = useRef<HTMLHeadElement>(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const blur = Math.min(scrollY / 20, 15);
-      setScrollBlur(blur);
+      // Track whether we've scrolled past the top so the glass effect only
+      // kicks in once the page moves.
+      setScrolled(scrollY > 8);
+      // Hide when scrolling down (past a small threshold), reveal on scroll up.
+      if (scrollY > lastScrollY.current && scrollY > 80) {
+        setHidden(true);
+      } else if (scrollY < lastScrollY.current) {
+        setHidden(false);
+      }
+      lastScrollY.current = scrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -26,9 +35,13 @@ export function Header() {
 
   return (
     <header
-      ref={headerRef}
-      className="shaped-edge shaped-header sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur"
-      style={{ filter: `blur(${scrollBlur}px)` }}
+      className={cn(
+        "shaped-edge shaped-header sticky top-0 z-40 border-b transition-transform duration-300 ease-out",
+        hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0",
+        scrolled
+          ? "border-border/40 bg-surface/60 shadow-lg backdrop-blur-xl backdrop-saturate-150"
+          : "border-border bg-surface/95 backdrop-blur",
+      )}
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-6">
         <a href="/" className="flex shrink-0 items-center gap-2.5 font-semibold">

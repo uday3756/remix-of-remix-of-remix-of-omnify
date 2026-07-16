@@ -195,8 +195,9 @@
   --color-input: var(--border);
   --color-ring: var(--primary);
 
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
 }
 
 /* ---------- Page-wide background (data-page-bg on <html>) ----------
@@ -345,8 +346,33 @@
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    transition:
-      background-color 0.25s ease,
-      color 0.25s ease;
+    /* Crisper rendering + Inter's nicer letter shapes and proportional-but-
+       aligned figures for a more refined read. */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv11", "ss01";
+    line-height: 1.6;
+    letter-spacing: -0.006em;
+  }
+
+  /* Headings use the display face with tighter tracking + balanced wrapping so
+     titles sit as compact, confident blocks. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  /* Prices, times and other tabular data line up in columns. */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }

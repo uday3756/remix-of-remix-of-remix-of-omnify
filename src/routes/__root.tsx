@@ -80,23 +80,38 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "My Gym Walnut Creek" },
       {
         name: "description",
-        content:
-          "Find the perfect class, camp, or party for your family at My Gym Walnut Creek.",
+        content: "Find the perfect class, camp, or party for your family at My Gym Walnut Creek.",
       },
       { property: "og:title", content: "My Gym Walnut Creek" },
       {
         property: "og:description",
-        content:
-          "Find the perfect class, camp, or party for your family at My Gym Walnut Creek.",
+        content: "Find the perfect class, camp, or party for your family at My Gym Walnut Creek.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "My Gym Walnut Creek" },
-      { name: "twitter:description", content: "Find the perfect class, camp, or party for your family at My Gym Walnut Creek." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/318d5d4b-b225-4333-b268-49b319add883/id-preview-c0dfb6bd--433b873a-de4c-4d80-9048-3d1e8859a99c.lovable.app-1784109453651.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/318d5d4b-b225-4333-b268-49b319add883/id-preview-c0dfb6bd--433b873a-de4c-4d80-9048-3d1e8859a99c.lovable.app-1784109453651.png" },
+      {
+        name: "twitter:description",
+        content: "Find the perfect class, camp, or party for your family at My Gym Walnut Creek.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/318d5d4b-b225-4333-b268-49b319add883/id-preview-c0dfb6bd--433b873a-de4c-4d80-9048-3d1e8859a99c.lovable.app-1784109453651.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/318d5d4b-b225-4333-b268-49b319add883/id-preview-c0dfb6bd--433b873a-de4c-4d80-9048-3d1e8859a99c.lovable.app-1784109453651.png",
+      },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,

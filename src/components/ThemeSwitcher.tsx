@@ -60,6 +60,7 @@ export function ThemeSwitcher() {
     } else {
       const blobUrl = URL.createObjectURL(file);
       apply(blobUrl);
+      setHeroBg("video");
       setUploadNotice(
         `Your video is playing for this visit (blob URLs can't be saved after a reload).`,
       );

@@ -10,6 +10,22 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
   const lastScrollY = useRef(0);
+  const closeTimer = useRef<number | undefined>(undefined);
+
+  // Opening a menu is instant; closing is delayed by a short grace period so a
+  // brief cursor slip (e.g. travelling from the trigger to the panel) doesn't
+  // snap the dropdown shut before you can reach it. Any re-enter cancels the
+  // pending close.
+  const handleSetActive = (item: string | null) => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    if (item === null) {
+      closeTimer.current = window.setTimeout(() => setActive(null), 180);
+    } else {
+      setActive(item);
+    }
+  };
+
+  useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,12 +67,12 @@ export function Header() {
         </a>
 
         <div className={cn("hidden lg:flex flex-1 justify-center")}>
-          <Menu setActive={setActive}>
+          <Menu setActive={handleSetActive}>
             <a href="/" className="text-foreground hover:opacity-80 cursor-pointer">
               Home
             </a>
 
-            <MenuItem setActive={setActive} active={active} item="Services">
+            <MenuItem setActive={handleSetActive} active={active} item="Services">
               <div className="flex flex-col space-y-2 text-sm">
                 <HoveredLink href="#services">All services</HoveredLink>
                 <HoveredLink href="#services">Enrollments</HoveredLink>
@@ -67,7 +83,7 @@ export function Header() {
               </div>
             </MenuItem>
 
-            <MenuItem setActive={setActive} active={active} item="Programs">
+            <MenuItem setActive={handleSetActive} active={active} item="Programs">
               <div className="grid grid-cols-2 gap-6 p-2">
                 <ProductItem
                   title="Waddlers"
@@ -96,7 +112,7 @@ export function Header() {
               </div>
             </MenuItem>
 
-            <MenuItem setActive={setActive} active={active} item="Pricing">
+            <MenuItem setActive={handleSetActive} active={active} item="Pricing">
               <div className="flex flex-col space-y-2 text-sm">
                 <HoveredLink href="#class-cards">Class Cards</HoveredLink>
                 <HoveredLink href="#trials">Free Trial</HoveredLink>

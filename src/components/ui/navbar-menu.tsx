@@ -36,7 +36,10 @@ export const MenuItem = ({
           transition={transition}
         >
           {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 -translate-x-1/2 pt-4">
+            // `top-full` + `pt-4`: the panel sits just below the pill, and the
+            // padding is an invisible hover bridge so moving the cursor from the
+            // trigger down to the menu never crosses empty space.
+            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4">
               <motion.div
                 transition={transition}
                 layoutId="active"

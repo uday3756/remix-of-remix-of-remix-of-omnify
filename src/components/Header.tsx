@@ -30,8 +30,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleSection = (id: string) =>
-    setMobileSection((cur) => (cur === id ? null : id));
+  const toggleSection = (id: string) => setMobileSection((cur) => (cur === id ? null : id));
 
   return (
     <header
@@ -152,12 +151,48 @@ export function Header() {
             open={mobileSection === "services"}
             onToggle={() => toggleSection("services")}
           >
-            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">All services</a>
-            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Enrollments</a>
-            <a href="#class-cards" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Class Cards</a>
-            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Camps</a>
-            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Parties</a>
-            <a href="#trials" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Trials</a>
+            <a
+              href="#services"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              All services
+            </a>
+            <a
+              href="#services"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Enrollments
+            </a>
+            <a
+              href="#class-cards"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Class Cards
+            </a>
+            <a
+              href="#services"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Camps
+            </a>
+            <a
+              href="#services"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Parties
+            </a>
+            <a
+              href="#trials"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Trials
+            </a>
           </MobileSection>
 
           <MobileSection
@@ -167,10 +202,30 @@ export function Header() {
             onToggle={() => toggleSection("programs")}
           >
             <div className="grid grid-cols-2 gap-3 p-2">
-              <MobileProgram src="/yogamat.svg" title="Waddlers" desc="Beginner enrollment." onClick={() => setMobileOpen(false)} />
-              <MobileProgram src="/resistanceband.svg" title="Little Bunnies" desc="Intermediate class." onClick={() => setMobileOpen(false)} />
-              <MobileProgram src="/gymbag.svg" title="Champions" desc="Advanced training." onClick={() => setMobileOpen(false)} />
-              <MobileProgram src="/waterbottle.svg" title="Summer Camp" desc="Week-long camps." onClick={() => setMobileOpen(false)} />
+              <MobileProgram
+                src="/yogamat.svg"
+                title="Waddlers"
+                desc="Beginner enrollment."
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileProgram
+                src="/resistanceband.svg"
+                title="Little Bunnies"
+                desc="Intermediate class."
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileProgram
+                src="/gymbag.svg"
+                title="Champions"
+                desc="Advanced training."
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileProgram
+                src="/waterbottle.svg"
+                title="Summer Camp"
+                desc="Week-long camps."
+                onClick={() => setMobileOpen(false)}
+              />
             </div>
           </MobileSection>
 
@@ -180,10 +235,34 @@ export function Header() {
             open={mobileSection === "pricing"}
             onToggle={() => toggleSection("pricing")}
           >
-            <a href="#class-cards" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Class Cards</a>
-            <a href="#trials" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Free Trial</a>
-            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Enrollments</a>
-            <a href="#services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary">Party Packages</a>
+            <a
+              href="#class-cards"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Class Cards
+            </a>
+            <a
+              href="#trials"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Free Trial
+            </a>
+            <a
+              href="#services"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Enrollments
+            </a>
+            <a
+              href="#services"
+              onClick={() => setMobileOpen(false)}
+              className="block rounded-lg px-3 py-2 text-sm text-muted hover:text-primary"
+            >
+              Party Packages
+            </a>
           </MobileSection>
 
           <a
@@ -220,10 +299,7 @@ function MobileSection({
         className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-foreground hover:bg-surface-alt"
       >
         {label}
-        <span
-          aria-hidden
-          className={`transition-transform ${open ? "rotate-180" : ""}`}
-        >
+        <span aria-hidden className={`transition-transform ${open ? "rotate-180" : ""}`}>
           ▾
         </span>
       </button>

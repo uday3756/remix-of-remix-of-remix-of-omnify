@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Menu, MenuItem, HoveredLink, ProductItem } from "@/components/ui/navbar-menu";
 import { SITE } from "@/data/nav";
 import { cn } from "@/lib/utils";
@@ -179,7 +179,7 @@ function MobileSection({
   label: string;
   open: boolean;
   onToggle: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div className="border-b border-border last:border-0">

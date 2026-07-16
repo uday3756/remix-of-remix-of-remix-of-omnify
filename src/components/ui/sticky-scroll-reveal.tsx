@@ -25,20 +25,19 @@ export const StickyScroll = ({
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const cardsBreakpoints = content.map((_, index) => index / cardLength);
-    const closestBreakpointIndex = cardsBreakpoints.reduce(
-      (acc, breakpoint, index) => {
-        const distance = Math.abs(latest - breakpoint);
-        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
-          return index;
-        }
-        return acc;
-      },
-      0,
-    );
+    const closestBreakpointIndex = cardsBreakpoints.reduce((acc, breakpoint, index) => {
+      const distance = Math.abs(latest - breakpoint);
+      if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+        return index;
+      }
+      return acc;
+    }, 0);
     setActiveCard(closestBreakpointIndex);
   });
 
-  const backgroundColors = ["#0f172a", "#000000", "#171717"];
+  // Use the theme's foreground tone for every card so the section reads as one
+  // consistent dark block instead of three slightly different blacks.
+  const backgroundColors = ["var(--foreground)", "var(--foreground)", "var(--foreground)"];
   const linearGradients = [
     "linear-gradient(to bottom right, #06b6d4, #10b981)",
     "linear-gradient(to bottom right, #ec4899, #6366f1)",

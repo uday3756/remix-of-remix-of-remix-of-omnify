@@ -58,9 +58,17 @@ export function Header() {
           : "border-border bg-surface/95 backdrop-blur",
       )}
     >
-      {/* Utility ribbon: quick contact + account links, above the main nav.
-          Lives inside the sticky header so it hides/reveals on scroll too. */}
-      <div className="border-b border-border/50 bg-foreground text-background">
+      {/* Utility ribbon: quick contact + account links. Only shown at the very
+          top of the page — once scrolled, it collapses so the reveal-on-scroll-up
+          brings back just the nav bar (not the ribbon). */}
+      <div
+        className={cn(
+          "overflow-hidden bg-foreground text-background transition-all duration-300 ease-out",
+          scrolled
+            ? "max-h-0 border-b-0 opacity-0"
+            : "max-h-12 border-b border-border/50 opacity-100",
+        )}
+      >
         <div className="mx-auto flex h-9 max-w-6xl items-center justify-between gap-4 px-6 text-[11px] sm:text-xs">
           <div className="flex items-center gap-4 sm:gap-6">
             <a

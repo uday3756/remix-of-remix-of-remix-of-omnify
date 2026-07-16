@@ -10,7 +10,7 @@ export type ThemeId =
   | "noir"
   | "snow";
 export type ShapeId = "straight" | "wave" | "curve" | "angle";
-export type HeroBgId = "default" | "image" | "video";
+export type HeroBgId = "default" | "image" | "video" | "gradient";
 
 export interface ThemeDefinition {
   id: ThemeId;
@@ -52,7 +52,25 @@ export const HERO_BACKGROUNDS: HeroBgDefinition[] = [
   { id: "default", label: "Default" },
   { id: "image", label: "Image" },
   { id: "video", label: "Video" },
+  { id: "gradient", label: "Gradient" },
 ];
+
+// Palette used by the animated "Gradient" hero background, per theme, so the
+// gradient always matches the header/footer colors. Kept in JS (not read from
+// CSS vars at runtime) so it is correct on first paint and never lags a theme
+// change. Order: base color first, then wave layers.
+export const HERO_GRADIENT_COLORS: Record<ThemeId, string[]> = {
+  default: ["#5b3fd6", "#7c5cf0", "#22c55e", "#5b3fd6"],
+  sunset: ["#f97316", "#f43f5e", "#facc15", "#f97316"],
+  forest: ["#059669", "#0d9488", "#84cc16", "#059669"],
+  midnight: ["#7c3aed", "#6366f1", "#f472b6", "#7c3aed"],
+  ocean: ["#1c7293", "#065a82", "#21295c", "#1c7293"],
+  coral: ["#f96167", "#2f3c7e", "#f9a825", "#f96167"],
+  berry: ["#db2777", "#a21caf", "#f472b6", "#db2777"],
+  cloud: ["#3b82f6", "#1e3a5f", "#f59e0b", "#3b82f6"],
+  noir: ["#3f3f46", "#71717a", "#a1a1aa", "#52525b"],
+  snow: ["#0a0a0a", "#3f3f46", "#52525b", "#18181b"],
+};
 
 export const DEFAULT_THEME: ThemeId = "default";
 export const DEFAULT_SHAPE: ShapeId = "straight";

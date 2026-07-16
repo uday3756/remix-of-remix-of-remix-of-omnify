@@ -6,7 +6,9 @@ export type ThemeId =
   | "ocean"
   | "coral"
   | "berry"
-  | "cloud";
+  | "cloud"
+  | "noir"
+  | "snow";
 export type ShapeId = "straight" | "wave" | "curve" | "angle";
 export type HeroBgId = "default" | "image" | "video";
 
@@ -35,6 +37,8 @@ export const THEMES: ThemeDefinition[] = [
   { id: "berry", label: "Berry", swatch: "#db2777" },
   { id: "cloud", label: "Cloud", swatch: "#3B82F6" },
   { id: "midnight", label: "Midnight", swatch: "#7c3aed" },
+  { id: "noir", label: "Black", swatch: "#000000" },
+  { id: "snow", label: "White", swatch: "#ffffff" },
 ];
 
 export const SHAPES: ShapeDefinition[] = [

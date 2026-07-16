@@ -22,7 +22,7 @@ export function CategoryBrowse({ activeCategory, onSelect }: CategoryBrowseProps
                 type="button"
                 onClick={() => onSelect(isActive ? "all" : category.id)}
                 aria-pressed={isActive}
-                className={`flex w-32 flex-col items-center gap-2 rounded-xl border bg-surface p-5 text-center shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md ${
+                className={`flex w-32 flex-col items-center gap-2 rounded-xl border bg-surface p-5 text-center text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md ${
                   isActive
                     ? "border-primary ring-1 ring-primary"
                     : "border-border hover:border-primary/40"

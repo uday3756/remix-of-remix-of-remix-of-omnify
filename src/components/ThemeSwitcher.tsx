@@ -43,9 +43,7 @@ export function ThemeSwitcher() {
     if (!file) return;
     const limit = kind === "photo" ? MAX_PHOTO_BYTES : MAX_VIDEO_BYTES;
     if (file.size > limit) {
-      setUploadNotice(
-        `That ${kind} is too large (max ${Math.round(limit / 1024 / 1024)}MB).`,
-      );
+      setUploadNotice(`That ${kind} is too large (max ${Math.round(limit / 1024 / 1024)}MB).`);
       return;
     }
     // Photos: try data URL so they survive reloads. Videos: always blob URL.
@@ -81,7 +79,7 @@ export function ThemeSwitcher() {
                 aria-label={t.label}
                 aria-pressed={theme === t.id}
                 className={`flex h-9 w-9 items-center justify-center rounded-full border-2 transition-transform hover:scale-110 ${
-                  theme === t.id ? "border-foreground" : "border-transparent"
+                  theme === t.id ? "border-foreground" : "border-foreground/20"
                 }`}
                 style={{ backgroundColor: t.swatch }}
               />

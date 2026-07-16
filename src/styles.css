@@ -78,27 +78,27 @@
   --border: #b8d4e8;
   --muted: #4a6b82;
 
-  --primary: #1C7293;
+  --primary: #1c7293;
   --primary-foreground: #ffffff;
-  --secondary: #065A82;
+  --secondary: #065a82;
   --secondary-foreground: #ffffff;
-  --accent: #21295C;
+  --accent: #21295c;
   --accent-foreground: #ffffff;
 }
 
 :root[data-theme="coral"] {
-  --background: #FCF6F5;
-  --foreground: #2F3C7E;
+  --background: #fcf6f5;
+  --foreground: #2f3c7e;
   --surface: #ffffff;
   --surface-alt: #ffe4e2;
   --border: #fbc9c5;
   --muted: #6b6a8a;
 
-  --primary: #F96167;
+  --primary: #f96167;
   --primary-foreground: #ffffff;
-  --secondary: #2F3C7E;
+  --secondary: #2f3c7e;
   --secondary-foreground: #ffffff;
-  --accent: #F9A825;
+  --accent: #f9a825;
   --accent-foreground: #3a2a05;
 }
 
@@ -132,6 +132,46 @@
   --secondary-foreground: #ffffff;
   --accent: #f59e0b;
   --accent-foreground: #3a2a05;
+}
+
+:root[data-theme="noir"] {
+  --background: #000000;
+  --foreground: #fafafa;
+  --surface: #0c0c0c;
+  --surface-alt: #171717;
+  --border: #2a2a2a;
+  --muted: #a1a1aa;
+
+  --primary: #fafafa;
+  --primary-foreground: #000000;
+  --primary-soft: #1f1f1f;
+  --secondary: #d4d4d8;
+  --secondary-foreground: #000000;
+  --accent: #fafafa;
+  --accent-foreground: #000000;
+
+  --party: #d4d4d8;
+  --party-foreground: #000000;
+}
+
+:root[data-theme="snow"] {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --surface: #ffffff;
+  --surface-alt: #f4f4f5;
+  --border: #e4e4e7;
+  --muted: #52525b;
+
+  --primary: #0a0a0a;
+  --primary-foreground: #ffffff;
+  --primary-soft: #f4f4f5;
+  --secondary: #3f3f46;
+  --secondary-foreground: #ffffff;
+  --accent: #0a0a0a;
+  --accent-foreground: #ffffff;
+
+  --party: #3f3f46;
+  --party-foreground: #ffffff;
 }
 
 @theme inline {
@@ -199,11 +239,11 @@
 /* Wave */
 :root[data-shape="wave"] .shaped-edge::after {
   -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 18' preserveAspectRatio='none'><path d='M0 0 Q30 24 60 9 T120 0 L120 18 L0 18 Z' fill='black'/></svg>");
-          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 18' preserveAspectRatio='none'><path d='M0 0 Q30 24 60 9 T120 0 L120 18 L0 18 Z' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 18' preserveAspectRatio='none'><path d='M0 0 Q30 24 60 9 T120 0 L120 18 L0 18 Z' fill='black'/></svg>");
   -webkit-mask-size: 120px 18px;
-          mask-size: 120px 18px;
+  mask-size: 120px 18px;
   -webkit-mask-repeat: repeat-x;
-          mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
 }
 .shaped-footer.shaped-edge:where([data-shape="wave"] *)::after,
 :root[data-shape="wave"] .shaped-footer.shaped-edge::after {
@@ -213,21 +253,21 @@
 /* Curve */
 :root[data-shape="curve"] .shaped-edge::after {
   -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, black 62%, transparent 63%);
-          mask-image: radial-gradient(120% 100% at 50% 0%, black 62%, transparent 63%);
+  mask-image: radial-gradient(120% 100% at 50% 0%, black 62%, transparent 63%);
 }
 :root[data-shape="curve"] .shaped-footer.shaped-edge::after {
   -webkit-mask-image: radial-gradient(120% 100% at 50% 100%, black 62%, transparent 63%);
-          mask-image: radial-gradient(120% 100% at 50% 100%, black 62%, transparent 63%);
+  mask-image: radial-gradient(120% 100% at 50% 100%, black 62%, transparent 63%);
 }
 
 /* Angle (zig-zag) */
 :root[data-shape="angle"] .shaped-edge::after {
   -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 18' preserveAspectRatio='none'><polygon points='0,0 20,18 40,0 40,18 0,18' fill='black'/></svg>");
-          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 18' preserveAspectRatio='none'><polygon points='0,0 20,18 40,0 40,18 0,18' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 18' preserveAspectRatio='none'><polygon points='0,0 20,18 40,0 40,18 0,18' fill='black'/></svg>");
   -webkit-mask-size: 40px 18px;
-          mask-size: 40px 18px;
+  mask-size: 40px 18px;
   -webkit-mask-repeat: repeat-x;
-          mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
 }
 :root[data-shape="angle"] .shaped-footer.shaped-edge::after {
   transform: scaleY(-1);
